@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Justin's Skillz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50">
+    <nav class="bg-white border-b p-4 flex justify-between items-center px-10">
+        <div class="flex items-center gap-3">
+            <img src="logo.png" class="h-8">
+            <span class="font-black uppercase tracking-tighter">Student Dashboard</span>
+        </div>
+        <a href="index.html" class="text-xs font-bold text-red-500 uppercase">Logout</a>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-12 px-6">
+        <h1 class="text-4xl font-black mb-8">Welcome Back, <span class="text-blue-600">Scholar</span></h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                <h3 class="font-bold mb-2">My Progress</h3>
+                <div class="w-full bg-slate-100 h-2 rounded-full mb-2">
+                    <div class="bg-blue-600 h-2 w-3/4 rounded-full"></div>
+                </div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase">75% of Math Logic Complete</span>
+            </div>
+
+            <div class="bg-blue-600 p-8 rounded-3xl shadow-lg text-white relative overflow-hidden">
+                <h3 class="font-bold mb-2">Unlock Rewards</h3>
+                <p class="text-xs opacity-80 mb-6">Find secret words to earn discount codes.</p>
+                <a href="code.html" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold text-xs uppercase">Claim Now</a>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                <h3 class="font-bold mb-2">Next Lesson</h3>
+                <p class="text-xs text-slate-500">Introduction to Quantum Redstone Logic</p>
+                <a href="labs.html" class="text-blue-600 text-xs font-bold mt-4 block uppercase underline">Open Lab</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

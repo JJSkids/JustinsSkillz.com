@@ -2,89 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Justin's Skillz | Learning Made Easy</title>
+    <title>Justin's Skillz | Home</title>
     <link rel="icon" href="logo.jpg" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .nav-shadow { border-bottom: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900" onload="loadLeaderboard()">
-
-    <nav class="fixed top-0 w-full z-50 bg-white border-b border-slate-200 px-6 py-3 flex justify-between items-center shadow-sm">
+<body onload="loadLeaderboard()">
+    <nav class="fixed top-0 w-full z-50 bg-white nav-shadow px-6 py-3 flex justify-between items-center">
         <div class="flex items-center gap-4">
             <img src="logo.jpg" alt="Logo" class="h-12 w-12 rounded-lg shadow-md">
             <div>
-                <div class="text-xl font-black text-slate-800 tracking-tighter leading-none uppercase">JUSTINSSKILLZ.COM</div>
+                <div class="text-xl font-black text-slate-800 tracking-tighter uppercase leading-none">JUSTINSSKILLZ.COM</div>
                 <div class="text-[10px] text-slate-500 font-medium italic">...Learning made easy</div>
             </div>
         </div>
         <div class="flex items-center gap-6">
             <a href="labs.html" class="text-sm font-bold text-blue-600 hover:text-blue-400 uppercase tracking-widest">Labs</a>
-            <a href="signin.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg text-xs font-black uppercase shadow-lg shadow-blue-200">Claim Code</a>
+            <a href="signin.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg text-xs font-black uppercase shadow-lg shadow-blue-100">Sign In</a>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 pt-32">
-        <section class="mb-16">
-            <h2 class="text-3xl font-black text-slate-800 mb-8">Leaderboard</h2>
-            <div id="leaderboard-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                </div>
-        </section>
-
-        <h2 class="text-3xl font-black text-slate-800 mb-8">Body Content</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl transition-all">
-                <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl mb-6 text-amber-600">∑</div>
-                <h3 class="text-xl font-bold mb-3">Mathematics</h3>
-                <p class="text-slate-500 text-sm">3n+1 visualizations and advanced algebraic logic.</p>
-            </div>
-            <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl transition-all">
-                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-6 text-blue-600">{" "}</div>
-                <h3 class="text-xl font-bold mb-3">Coding & Tech</h3>
-                <p class="text-slate-500 text-sm">Cloud database integration and API development.</p>
-            </div>
-            <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl transition-all">
-                <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl mb-6 text-emerald-600">⚛</div>
-                <h3 class="text-xl font-bold mb-3">Science Lab</h3>
-                <p class="text-slate-500 text-sm">Interactive physics and projectile motion arcs.</p>
-            </div>
-        </div>
-
-        <section class="max-w-2xl mx-auto bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm mb-20">
-            <h2 class="text-2xl font-black mb-6 text-center">Contact Justin</h2>
-            <form action="#" class="space-y-4">
-                <input type="text" placeholder="Your Name" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
-                <textarea placeholder="Your Message" rows="4" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500"></textarea>
-                <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-blue-600 transition-colors">Send Message</button>
-            </form>
-        </section>
+    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
+        <h1 class="text-6xl font-black mb-6">Welcome to the <span class="text-blue-600">Hub</span></h1>
+        <p class="text-slate-500 mb-12">Login to access your personalized dashboard and claim unique rewards.</p>
+        
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-6" id="leaderboard-container">
+            </section>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 p-12 text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
-        Justin's Skillz // Learning Made Easy // 2025
-    </footer>
-
-    <script src="app.js"></script>
     <script>
+        const SB_URL = "YOUR_SUPABASE_URL";
+        const SB_KEY = "YOUR_SUPABASE_KEY";
+
         async function loadLeaderboard() {
             const container = document.getElementById('leaderboard-container');
             try {
                 const response = await fetch(`${SB_URL}/rest/v1/discount_records?select=user_name,final_code&order=id.desc&limit=4`, {
                     headers: { "apikey": SB_KEY, "Authorization": `Bearer ${SB_KEY}` }
                 });
-                const winners = await response.json();
-                container.innerHTML = winners.map((user, i) => `
-                    <div class="bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-sm">
-                        <div class="h-40 bg-slate-900 flex items-center justify-center relative">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${user.user_name}" class="w-24 h-24">
-                            <div class="absolute top-4 right-4 bg-blue-600 text-[8px] text-white font-black px-2 py-1 rounded">WINNER</div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="font-black text-slate-800">${user.user_name}</h3>
-                            <div class="text-[9px] font-black text-blue-600 mt-4 mono uppercase">${user.final_code}</div>
-                        </div>
+                const data = await response.json();
+                container.innerHTML = data.map(u => `
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${u.user_name}" class="w-16 h-16 mx-auto mb-4">
+                        <div class="font-black text-slate-800">${u.user_name}</div>
+                        <div class="text-[9px] text-blue-600 font-bold uppercase mt-2">${u.final_code}</div>
                     </div>`).join('');
-            } catch (e) { container.innerHTML = "<p>Database Syncing...</p>"; }
+            } catch (e) { container.innerHTML = "Syncing..."; }
         }
     </script>
 </body>

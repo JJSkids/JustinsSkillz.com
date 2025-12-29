@@ -2,30 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claim Code | Justin's Skillz</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #0f172a; }
-        .glow-portal { box-shadow: 0 0 60px rgba(59, 130, 246, 0.15); }
-    </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
-    <div class="max-w-md w-full bg-white p-12 rounded-[3rem] text-center glow-portal">
-        <img src="logo.jpg" class="h-20 mx-auto mb-8">
-        <h2 class="text-3xl font-black text-slate-800 uppercase tracking-tighter">Claim Code</h2>
-        <p class="text-[10px] text-slate-400 font-bold tracking-[0.3em] uppercase mb-10">Type the secret string now</p>
-        
-        <div class="p-6 bg-blue-50 border border-blue-100 rounded-2xl text-[10px] text-blue-600 font-black font-mono">
+<body class="bg-slate-900 flex items-center justify-center min-h-screen p-4">
+    <div class="max-w-md w-full bg-white p-12 rounded-[3rem] text-center shadow-2xl">
+        <img src="logo.jpg" class="h-16 mx-auto mb-8 rounded-xl">
+        <h2 class="text-3xl font-black text-slate-800 uppercase tracking-tighter italic">Claim Code</h2>
+        <div class="p-6 bg-blue-50 border border-blue-100 rounded-2xl text-[10px] text-blue-600 font-black font-mono animate-pulse">
             [ LISTENING FOR FREQUENCY... ]
         </div>
-        <a href="dashboard.html" class="mt-8 block text-xs font-bold text-slate-400 uppercase italic">Back to Dashboard</a>
+        <p class="mt-4 text-xs text-slate-400">Type a secret word anywhere on this page to claim your reward.</p>
+        <a href="dashboard.html" class="mt-8 block text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-blue-600">Back to Dashboard</a>
     </div>
 
     <script>
-        // Replace with your keys
         const SB_URL = "https://xkvozzzamcolofmedrto.supabase.co";
-        const SB_KEY = "https://xkvozzzamcolofmedrto.supabase.co";
-        const secrets = ["lambda", "quantum", "redstone", "polymath", "logic", "mathematics", "science", "minecraft"];
+        const SB_KEY = "sb_publishable__8qGVSppJs2gRDGm_uvVUA_4JXH-icx";
+        const secrets = ["lambda", "quantum", "redstone", "polymath", "logic"];
         let typed = "";
 
         window.addEventListener('keydown', async (e) => {
@@ -40,7 +35,7 @@
                         headers: { "apikey": SB_KEY, "Authorization": `Bearer ${SB_KEY}`, "Content-Type": "application/json" },
                         body: JSON.stringify({ user_name: name, secret_word: found, final_code: code })
                     });
-                    alert("CLAIMED! Code: " + code);
+                    alert("CLAIMED! Your code is: " + code);
                     window.location.href = "index.html";
                 }
                 typed = "";

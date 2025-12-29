@@ -8,11 +8,11 @@
 </head>
 <body class="bg-slate-100 flex items-center justify-center min-h-screen p-4">
     <div class="w-full max-w-sm bg-white p-10 rounded-[2.5rem] shadow-2xl text-center">
-        <img src="logo.jpg" class="h-16 mx-auto mb-6 rounded-xl">
-        <h2 class="text-2xl font-black text-slate-800 mb-8 uppercase tracking-tighter italic">Member Entry</h2>
+        <img src="logo.jpg" class="h-16 mx-auto mb-6 rounded-xl shadow-md">
+        <h2 class="text-2xl font-black text-slate-800 mb-8 uppercase italic tracking-tighter">Member Login</h2>
         <form class="space-y-4 text-left" id="loginForm">
-            <input type="text" id="username" required class="w-full p-4 bg-slate-50 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-base" placeholder="Enter Username">
-            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg active:scale-95 transition-all uppercase text-xs tracking-widest">Access Dashboard</button>
+            <input type="text" id="username" required class="w-full p-4 bg-slate-50 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter Name">
+            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg active:scale-95 transition-all uppercase text-xs tracking-widest">Enter Dashboard</button>
         </form>
     </div>
 
@@ -23,20 +23,12 @@
         document.getElementById('loginForm').onsubmit = async (e) => {
             e.preventDefault();
             const user = document.getElementById('username').value;
-            
-            // Log this visit to Supabase
             await fetch(`${SB_URL}/rest/v1/site_logs`, {
                 method: "POST",
                 headers: { "apikey": SB_KEY, "Authorization": `Bearer ${SB_KEY}`, "Content-Type": "application/json" },
                 body: JSON.stringify({ user_name: user })
             });
-
-            // Admin Logic
-            if (user === "LeProf") {
-                window.location.href = 'admin.html';
-            } else {
-                window.location.href = 'dashboard.html';
-            }
+            window.location.href = (user === "LeProf") ? 'admin.html' : 'dashboard.html';
         };
     </script>
 </body>

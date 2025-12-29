@@ -2,35 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Justin's Skillz | Home</title>
-    <link rel="icon" href="logo.jpg" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
-        .nav-shadow { border-bottom: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    </style>
 </head>
-<body onload="loadLeaderboard()">
-    <nav class="fixed top-0 w-full z-50 bg-white nav-shadow px-6 py-3 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-            <img src="logo.jpg" alt="Logo" class="h-12 w-12 rounded-lg shadow-md">
-            <div>
-                <div class="text-xl font-black text-slate-800 tracking-tighter uppercase leading-none">JUSTINSSKILLZ.COM</div>
-                <div class="text-[10px] text-slate-500 font-medium italic">...Learning made easy</div>
-            </div>
+<body class="bg-slate-50" onload="loadLeaderboard()">
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b px-6 py-4 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-3">
+            <img src="logo.jpg" class="h-10 w-10 rounded-lg shadow-sm">
+            <span class="font-black text-slate-800 tracking-tighter uppercase text-sm md:text-xl">JUSTINSSKILLZ</span>
         </div>
-        <div class="flex items-center gap-6">
-            <a href="labs.html" class="text-sm font-bold text-blue-600 hover:text-blue-400 uppercase tracking-widest">Labs</a>
-            <a href="signin.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg text-xs font-black uppercase shadow-lg shadow-blue-100">Sign In</a>
-        </div>
+        <a href="signin.html" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-xs font-black uppercase shadow-lg hover:bg-blue-700">Sign In</a>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
-        <h1 class="text-6xl font-black mb-6">Welcome to the <span class="text-blue-600">Hub</span></h1>
-        <p class="text-slate-500 mb-12">Login to access your personalized dashboard and claim unique rewards.</p>
-        
-        <section class="grid grid-cols-1 md:grid-cols-4 gap-6" id="leaderboard-container">
+    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20">
+        <div class="text-center mb-16">
+            <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tight">The <span class="text-blue-600 italic">Hub</span></h1>
+            <p class="text-slate-500 font-medium">Real-time learning rewards and technical labs.</p>
+        </div>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="leaderboard-container">
             </section>
     </main>
 
@@ -40,18 +31,18 @@
 
         async function loadLeaderboard() {
             const container = document.getElementById('leaderboard-container');
-            try {
-                const response = await fetch(`${SB_URL}/rest/v1/discount_records?select=user_name,final_code&order=id.desc&limit=4`, {
-                    headers: { "apikey": SB_KEY, "Authorization": `Bearer ${SB_KEY}` }
-                });
-                const data = await response.json();
-                container.innerHTML = data.map(u => `
-                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${u.user_name}" class="w-16 h-16 mx-auto mb-4">
+            const res = await fetch(`${SB_URL}/rest/v1/discount_records?select=user_name,final_code&order=id.desc&limit=4`, {
+                headers: { "apikey": SB_KEY, "Authorization": `Bearer ${SB_KEY}` }
+            });
+            const data = await res.json();
+            container.innerHTML = data.map(u => `
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex items-center gap-4 hover:scale-105 transition-transform">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${u.user_name}" class="w-12 h-12">
+                    <div>
                         <div class="font-black text-slate-800">${u.user_name}</div>
-                        <div class="text-[9px] text-blue-600 font-bold uppercase mt-2">${u.final_code}</div>
-                    </div>`).join('');
-            } catch (e) { container.innerHTML = "Syncing..."; }
+                        <div class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">${u.final_code}</div>
+                    </div>
+                </div>`).join('');
         }
     </script>
 </body>

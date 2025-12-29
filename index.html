@@ -12,17 +12,13 @@
             <img src="logo.jpg" class="h-10 w-10 rounded-lg shadow-sm">
             <span class="font-black text-slate-800 tracking-tighter uppercase text-sm md:text-xl">JUSTINSSKILLZ</span>
         </div>
-        <a href="signin.html" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-xs font-black uppercase shadow-lg hover:bg-blue-700">Sign In</a>
+        <a href="signin.html" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-xs font-black uppercase shadow-lg">Sign In</a>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20">
-        <div class="text-center mb-16">
-            <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tight">The <span class="text-blue-600 italic">Hub</span></h1>
-            <p class="text-slate-500 font-medium">Real-time learning rewards and technical labs.</p>
-        </div>
-
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="leaderboard-container">
-            </section>
+    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
+        <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tight">The <span class="text-blue-600 italic">Hub</span></h1>
+        <p class="text-slate-500 mb-16">Real-time learning rewards and technical labs.</p>
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="leaderboard-container"></section>
     </main>
 
     <script>
@@ -36,9 +32,9 @@
             });
             const data = await res.json();
             container.innerHTML = data.map(u => `
-                <div class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex items-center gap-4 hover:scale-105 transition-transform">
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex items-center gap-4">
                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${u.user_name}" class="w-12 h-12">
-                    <div>
+                    <div class="text-left">
                         <div class="font-black text-slate-800">${u.user_name}</div>
                         <div class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">${u.final_code}</div>
                     </div>
